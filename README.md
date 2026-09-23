@@ -1,6 +1,6 @@
 # Audio-Laya — Direct Speech-to-Decision PoC
 
-English-only PoC for classifying a call as `legitimate` or `spam` directly from audio. Default inference uses audio only. An optional semantic-alignment experiment uses paired source transcripts during training only. Public-facing technical reports: [English PDF](results/technical_report_en.pdf) ([LaTeX source](results/technical_report_en.tex)) and [Thai PDF](results/technical_report_th.pdf) ([LaTeX source](results/technical_report_th.tex)). Detailed working notes: [Thai experiment report](results/REPORT_TH.md).
+English-only PoC for classifying a call as `legitimate` or `spam` directly from audio. Default inference uses audio only. An optional semantic-alignment experiment uses paired source transcripts during training only.
 
 ```text
 16 kHz mono call audio

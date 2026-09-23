@@ -7,6 +7,13 @@ runs/
 # Per-call external evaluation data has not been cleared for repository storage.
 results/external_apptek/calls.jsonl
 
+# Technical reports and working notes are kept locally and are not published here.
+results/technical_report_en.tex
+results/technical_report_en.pdf
+results/technical_report_th.tex
+results/technical_report_th.pdf
+results/REPORT_TH.md
+
 # LaTeX build artifacts.
 *.aux
 *.fls
