@@ -1,0 +1,116 @@
+{
+  "task": "English urgency-tone classification",
+  "manifest": "data/raw/external/urgency-tone/eval_manifest.jsonl",
+  "dataset_metadata": {
+    "source": "https://doi.org/10.5281/zenodo.17502378",
+    "version": "v1",
+    "license": "CC BY 4.0",
+    "archive_md5": "427b71b8019b0f7eebcccb162dc594e0"
+  },
+  "target_task_training": false,
+  "n_examples": 40,
+  "label_names": [
+    "not_urgent",
+    "urgent"
+  ],
+  "protocol": "zero-shot target-task transfer; no target-task labels used for training or tuning; semantic checkpoint used paired FTC/Harper source-training transcripts during training only",
+  "transcripts_saved": false,
+  "methods": {
+    "A_projector_only": {
+      "n_calls": 40,
+      "n_chunks": 40,
+      "transcript_generated": false,
+      "accuracy": 0.45,
+      "balanced_accuracy": 0.44999999999999996,
+      "macro_f1": 0.4373401534526854,
+      "macro_precision": 0.44505494505494503,
+      "macro_recall": 0.44999999999999996,
+      "auroc_ovr_macro": 0.5175000000000001,
+      "confusion_matrix": [
+        [
+          12,
+          8
+        ],
+        [
+          14,
+          6
+        ]
+      ],
+      "majority_baseline": {
+        "class": "not_urgent",
+        "accuracy": 0.5,
+        "macro_f1": 0.3333333333333333
+      },
+      "inference_seconds": 2.496,
+      "latency_ms_per_call": 62.39,
+      "checkpoint": "runs/projector_only/best.pt",
+      "experiment": "projector_only",
+      "trainable_parameter_count": 1838592,
+      "peak_vram_bytes": 2182502400
+    },
+    "B_projector_plus_head": {
+      "n_calls": 40,
+      "n_chunks": 40,
+      "transcript_generated": false,
+      "accuracy": 0.725,
+      "balanced_accuracy": 0.725,
+      "macro_f1": 0.7025016903313049,
+      "macro_precision": 0.8225806451612903,
+      "macro_recall": 0.725,
+      "auroc_ovr_macro": 0.9975,
+      "confusion_matrix": [
+        [
+          20,
+          0
+        ],
+        [
+          11,
+          9
+        ]
+      ],
+      "majority_baseline": {
+        "class": "not_urgent",
+        "accuracy": 0.5,
+        "macro_f1": 0.3333333333333333
+      },
+      "inference_seconds": 1.418,
+      "latency_ms_per_call": 35.44,
+      "checkpoint": "runs/projector_head/best.pt",
+      "experiment": "projector_head",
+      "trainable_parameter_count": 28086785,
+      "peak_vram_bytes": 2230952448
+    },
+    "A_projector_semantic_alignment": {
+      "n_calls": 40,
+      "n_chunks": 40,
+      "transcript_generated": false,
+      "accuracy": 0.525,
+      "balanced_accuracy": 0.525,
+      "macro_f1": 0.44727272727272727,
+      "macro_precision": 0.5571428571428572,
+      "macro_recall": 0.525,
+      "auroc_ovr_macro": 0.7275,
+      "confusion_matrix": [
+        [
+          18,
+          2
+        ],
+        [
+          17,
+          3
+        ]
+      ],
+      "majority_baseline": {
+        "class": "not_urgent",
+        "accuracy": 0.5,
+        "macro_f1": 0.3333333333333333
+      },
+      "inference_seconds": 1.454,
+      "latency_ms_per_call": 36.36,
+      "checkpoint": "runs/projector_semantic/best.pt",
+      "experiment": "projector_only",
+      "trainable_parameter_count": 1838592,
+      "peak_vram_bytes": 2186463744
+    }
+  }
+}

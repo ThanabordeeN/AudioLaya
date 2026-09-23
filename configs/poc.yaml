@@ -1,0 +1,27 @@
+models:
+  whisper: openai/whisper-small.en
+  laya: convaiinnovations/laya
+
+data:
+  manifests:
+    - data/ftc.jsonl
+    - data/harper.jsonl
+  max_chunk_seconds: 30
+  augmentation:
+    gain_db: 3.0
+    noise_snr_db: [25, 40]
+
+training:
+  experiment: projector_head
+  epochs: 10
+  patience: 3
+  batch_size: 1
+  workers: 2
+  lr_projector: 0.0001
+  lr_laya_head: 0.00001
+  weight_decay: 0.01
+  gradient_clip: 1.0
+  seed: 42
+  mixed_precision: true
+  output_dir: runs/{experiment}
+  results_dir: results

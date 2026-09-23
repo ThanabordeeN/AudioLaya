@@ -1,0 +1,11 @@
+# Install a PyTorch build matching your CPU/CUDA setup first, if needed.
+torch>=2.1
+transformers>=4.40
+laya>=0.3.7
+numpy>=1.24
+scipy>=1.10
+soundfile>=0.12
+PyYAML>=6.0
+scikit-learn>=1.3
+matplotlib>=3.7
+streamlit>=1.40

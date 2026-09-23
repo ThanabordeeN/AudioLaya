@@ -1,0 +1,23 @@
+{
+  "model": "Whisper-small.en ASR -> standard Laya",
+  "transcript_generated": true,
+  "accuracy": 0.8936170212765957,
+  "macro_f1": 0.8916495901639344,
+  "macro_precision": 0.912037037037037,
+  "macro_recall": 0.8899576954069299,
+  "auroc": 0.9493352135374697,
+  "confusion_matrix": [
+    [
+      145,
+      1
+    ],
+    [
+      29,
+      107
+    ]
+  ],
+  "n_calls": 282,
+  "trainable_parameter_count": 0,
+  "peak_vram_bytes": 3480353792,
+  "inference_latency_ms_per_call": 762.3070139787237
+}

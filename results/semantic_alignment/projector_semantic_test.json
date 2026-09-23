@@ -1,0 +1,16 @@
+{
+  "checkpoint": "runs/projector_semantic/best.pt",
+  "semantic_temperature": 0.07,
+  "text_encoder": "convaiinnovations/laya",
+  "metric": "audio-to-reference-transcript retrieval among unique transcripts in each held-out split",
+  "results": {
+    "test": {
+      "loss": 3.5895371437072754,
+      "recall_at_1": 0.3325842618942261,
+      "recall_at_5": 0.748314619064331,
+      "n_pairs": 445,
+      "n_candidates": 413
+    }
+  },
+  "transcript_text_saved": false
+}

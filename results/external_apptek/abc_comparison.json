@@ -1,0 +1,55 @@
+{
+  "dataset": "AppTek Call-Center Dialogues",
+  "dataset_revision": "b98967d9946f7f59f58d08624a2a00fe98fe0219",
+  "subset": "14 customer-side role-play calls, one per accent; treated as legitimate",
+  "transcript_generated": {
+    "A": false,
+    "B": false,
+    "C": true
+  },
+  "note": "Normal-only sample: report false-alarm rate and spam-score summaries, not balanced F1/AUROC or real-world accuracy. C transcripts were not saved.",
+  "models": {
+    "A": {
+      "n_calls": 14,
+      "n_chunks": 343,
+      "true_label": "legitimate",
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "mean_spam_probability": 0.08659589290618896,
+      "median_spam_probability": 0.037943847477436066,
+      "min_spam_probability": 1.5004612805569195e-06,
+      "max_spam_probability": 0.48921340703964233,
+      "inference_seconds": 10.118,
+      "latency_ms_per_call": 722.73,
+      "peak_vram_bytes": 2181836800
+    },
+    "B": {
+      "n_calls": 14,
+      "n_chunks": 343,
+      "true_label": "legitimate",
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "mean_spam_probability": 0.045180853456258774,
+      "median_spam_probability": 0.00477631064131856,
+      "min_spam_probability": 5.52782257727813e-05,
+      "max_spam_probability": 0.2765849232673645,
+      "inference_seconds": 12.271,
+      "latency_ms_per_call": 876.51,
+      "peak_vram_bytes": 2223819264
+    },
+    "C": {
+      "n_calls": 14,
+      "n_chunks": 343,
+      "true_label": "legitimate",
+      "false_positives": 0,
+      "false_positive_rate": 0.0,
+      "mean_spam_probability": 0.27288768724396856,
+      "median_spam_probability": 0.2691301411290322,
+      "min_spam_probability": 0.19542692307692305,
+      "max_spam_probability": 0.3896842105263157,
+      "inference_seconds": 120.513,
+      "latency_ms_per_call": 8608.06,
+      "peak_vram_bytes": 3480908288
+    }
+  }
+}

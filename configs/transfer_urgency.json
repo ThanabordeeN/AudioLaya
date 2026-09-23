@@ -1,0 +1,21 @@
+{
+  "name": "English urgency-tone classification",
+  "manifest": "data/raw/external/urgency-tone/eval_manifest.jsonl",
+  "dataset_metadata": {
+    "source": "https://doi.org/10.5281/zenodo.17502378",
+    "version": "v1",
+    "license": "CC BY 4.0",
+    "archive_md5": "427b71b8019b0f7eebcccb162dc594e0"
+  },
+  "question_key": "urgency",
+  "task_prompt": "Classify the urgency conveyed by the speaker.",
+  "question_instruction": "Does the speech convey an urgent, time-critical situation or a non-urgent, routine situation?",
+  "label_names": [
+    "not_urgent",
+    "urgent"
+  ],
+  "options": {
+    "not_urgent": "a routine situation without urgency",
+    "urgent": "an emergency or time-critical situation that needs immediate attention"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "dataset": "AppTek Call-Center Dialogues",
+  "dataset_revision": "b98967d9946f7f59f58d08624a2a00fe98fe0219",
+  "checkpoint": "runs/projector_head/best.pt",
+  "n_calls": 14,
+  "true_label": "legitimate",
+  "false_positives": 0,
+  "false_positive_rate": 0.0,
+  "mean_spam_probability": 0.04518084391617906,
+  "median_spam_probability": 0.004776310466695577,
+  "min_spam_probability": 5.52782257727813e-05,
+  "max_spam_probability": 0.2765849232673645,
+  "total_chunks": 343,
+  "total_inference_seconds": 9.85,
+  "transcript_generated": false,
+  "interpretation": "All samples are role-played service calls treated as legitimate; this estimates false alarms on this external domain, not balanced real-world accuracy."
+}

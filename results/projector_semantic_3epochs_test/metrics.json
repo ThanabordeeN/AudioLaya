@@ -1,0 +1,25 @@
+{
+  "accuracy": 0.9964539007092199,
+  "macro_f1": 0.9964484969081773,
+  "macro_precision": 0.9965986394557823,
+  "macro_recall": 0.9963235294117647,
+  "auroc": 1.0,
+  "loss": 0.1787376894761467,
+  "inference_latency_ms_per_call": 60.37234472339622,
+  "n_calls": 282,
+  "n_chunks": 576,
+  "confusion_matrix": [
+    [
+      146,
+      0
+    ],
+    [
+      1,
+      135
+    ]
+  ],
+  "experiment": "projector_only",
+  "checkpoint_epoch": 3,
+  "trainable_parameter_count": 1838592,
+  "peak_vram_bytes": 2181837312
+}

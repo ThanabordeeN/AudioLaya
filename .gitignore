@@ -1,0 +1,17 @@
+__pycache__/
+.venv/
+data/raw/
+data/*.jsonl
+runs/
+
+# Per-call external evaluation data has not been cleared for repository storage.
+results/external_apptek/calls.jsonl
+
+# LaTeX build artifacts.
+*.aux
+*.fls
+*.fdb_latexmk
+*.log
+*.out
+*.synctex.gz
+*.toc

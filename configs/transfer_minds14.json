@@ -1,0 +1,45 @@
+{
+  "name": "MInDS-14 English-US intent classification",
+  "manifest": "data/raw/external/minds14/eval_manifest.jsonl",
+  "dataset_metadata": {
+    "source": "https://huggingface.co/datasets/PolyAI/minds14",
+    "revision": "40ce77cb32a384e4d50a568e1ec39ac804019d33",
+    "license": "CC BY 4.0",
+    "source_split": "en-US/train (all 563 examples; no official held-out split)"
+  },
+  "question_key": "intent",
+  "task_prompt": "Classify the speaker's banking request.",
+  "question_instruction": "Which one intent best describes the customer's banking request?",
+  "label_names": [
+    "abroad",
+    "address",
+    "app_error",
+    "atm_limit",
+    "balance",
+    "business_loan",
+    "card_issues",
+    "cash_deposit",
+    "direct_debit",
+    "freeze",
+    "high_value_payment",
+    "joint_account",
+    "latest_transactions",
+    "pay_bill"
+  ],
+  "options": {
+    "abroad": "banking or card use while abroad",
+    "address": "change or update a mailing address",
+    "app_error": "a technical problem with the banking app",
+    "atm_limit": "ATM cash withdrawal or a withdrawal limit",
+    "balance": "check an account balance",
+    "business_loan": "a business loan or business financing",
+    "card_issues": "a problem with a bank card",
+    "cash_deposit": "deposit cash into an account",
+    "direct_debit": "a direct debit or scheduled payment",
+    "freeze": "freeze or unfreeze a card or account",
+    "high_value_payment": "a large or high-value payment or transfer",
+    "joint_account": "open or manage a joint account",
+    "latest_transactions": "view recent account transactions",
+    "pay_bill": "pay a bill"
+  }
+}
