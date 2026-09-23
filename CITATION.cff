@@ -13,6 +13,7 @@ abstract: >-
 authors:
   - family-names: Nammungkun
     given-names: Thanabodee
+    orcid: "https://orcid.org/0009-0004-9410-9839"
 version: 1.0.0
 date-released: 2026-09-24
 license: MIT
