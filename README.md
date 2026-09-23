@@ -132,6 +132,8 @@ Training defaults are in [`configs/poc.yaml`](configs/poc.yaml). Early stopping 
 | A: Projector only | frozen | train | frozen | No | 1,838,592 | 0.996 | 1.000 |
 | B: Projector + head | frozen | train | train | No | 28,086,785 | 1.000 | 1.000 |
 
+"Trainable params" counts only the parameters updated by each method. It is not deployed model size: Laya itself is a 421M-parameter model, and both Whisper and Laya stay loaded at inference.
+
 These are results on the same 282-call internal test split (146 Harper legitimate, 136 FTC spam; 576 chunks). A and B use the direct-audio path; C generates an in-memory Whisper transcript and sends it to standard Laya. The test labels are fully confounded with dataset source, so these scores are pipeline comparisons only—not evidence of real-world spam detection. Metrics are in `results/projector_only/metrics.json`, `results/metrics.json` (B), and `results/transcript_baseline.json` (C). C is about 11–14× slower per call than the direct-audio models on this test split (762 ms vs. 55–71 ms); exact latency depends on audio length and hardware.
 
 ### External AppTek evaluation
