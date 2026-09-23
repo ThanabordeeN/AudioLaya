@@ -217,3 +217,11 @@ Open the local URL Streamlit prints. By default, choose **Unseen test sample** t
 ## Portfolio summary
 
 **Audio-Laya — Direct Speech-to-Decision Alignment:** mapped frozen Whisper speech representations into Laya's decision architecture with a learned 768-to-1024 projector, enabling audio-to-decision inference without intermediate transcription.
+
+## License
+
+Code, configuration, and scripts in this repository are released under the [MIT License](LICENSE).
+
+The technical reports and working notes are kept outside this repository and are released under CC BY 4.0.
+
+This repository does not redistribute the FTC Robocall Audio dataset, the HarperValleyBank corpus, MInDS-14, or the Urgency-tone dataset. Download and use each source under its own terms.

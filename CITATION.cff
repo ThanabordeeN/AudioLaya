@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software or build on its results, please cite the version you used."
+type: software
+title: "Audio-Laya: direct speech-to-decision classification with a frozen Whisper encoder and a trainable projector"
+abstract: >-
+  Research prototype that classifies call audio as legitimate or spam without an
+  intermediate transcription step. A frozen Whisper-small.en encoder feeds a
+  trainable 768-to-1024 projector whose output is appended to frozen ModernBERT
+  text states inside the Laya decision model. The deposit reports the internal
+  call-level split, cross-task zero-shot transfer, semantic-alignment retrieval,
+  and an external false-alarm check, together with the limitations that restrict
+  what those numbers support.
+authors:
+  - family-names: Nammungkun
+    given-names: Thanabodee
+version: 1.0.0
+date-released: 2026-09-24
+license: MIT
+keywords:
+  - speech classification
+  - robocall detection
+  - modality adaptation
+  - projector
+  - frozen encoder
+  - Whisper
+  - decision model
+  - semantic alignment
+  - reproducibility
+# Once the Zenodo record is published, add the assigned DOI here, for example:
+# doi: 10.5281/zenodo.0000000
