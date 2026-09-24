@@ -1,5 +1,7 @@
 # Audio-Laya — Direct Speech-to-Decision PoC
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22933034.svg)](https://doi.org/10.5281/zenodo.22933034)
+
 English-only PoC for classifying a call as `legitimate` or `spam` directly from audio. Default inference uses audio only. An optional semantic-alignment experiment uses paired source transcripts during training only.
 
 ```text
@@ -243,6 +245,23 @@ Open the local URL Streamlit prints. By default, choose **Unseen test sample** t
 ## Portfolio summary
 
 **Audio-Laya — Direct Speech-to-Decision Alignment:** mapped frozen Whisper speech representations into Laya's decision architecture with a learned 768-to-1024 projector, enabling audio-to-decision inference without intermediate transcription.
+
+## Citation
+
+```bibtex
+@misc{nammungkun2026audiolaya,
+  author    = {Nammungkun, Thanabodee},
+  title     = {Audio-Laya: direct speech-to-decision classification with a frozen
+               Whisper encoder and a trainable projector},
+  year      = {2026},
+  version   = {1.0.0},
+  doi       = {10.5281/zenodo.22933034},
+  publisher = {Zenodo},
+  url       = {https://doi.org/10.5281/zenodo.22933034}
+}
+```
+
+Use `10.5281/zenodo.22933034` to cite this version; `10.5281/zenodo.22933033` always resolves to the latest version. Machine-readable metadata is in [`CITATION.cff`](CITATION.cff).
 
 ## License
 
