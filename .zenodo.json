@@ -2,7 +2,7 @@
   "title": "Audio-Laya: direct speech-to-decision classification with a frozen Whisper encoder and a trainable projector",
   "upload_type": "software",
   "publication_date": "2026-09-24",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "language": "eng",
   "access_right": "open",
   "license": "MIT",

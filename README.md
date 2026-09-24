@@ -254,7 +254,7 @@ Open the local URL Streamlit prints. By default, choose **Unseen test sample** t
   title     = {Audio-Laya: direct speech-to-decision classification with a frozen
                Whisper encoder and a trainable projector},
   year      = {2026},
-  version   = {1.0.1},
+  version   = {1.0.2},
   doi       = {10.5281/zenodo.22933883},
   publisher = {Zenodo},
   url       = {https://doi.org/10.5281/zenodo.22933883}

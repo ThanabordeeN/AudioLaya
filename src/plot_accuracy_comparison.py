@@ -1,9 +1,11 @@
 """Academic accuracy-comparison figure across the three evaluation sets.
 
 Reads the stored result JSONs (single source of truth) and writes
-results/accuracy_comparison.pdf and .png. Run:
+results/accuracy_comparison.pdf and .png (English labels) or
+results/accuracy_comparison_th.pdf and .png (Thai labels). Run:
 
     python -m src.plot_accuracy_comparison
+    python -m src.plot_accuracy_comparison --lang th
 """
 
 from __future__ import annotations
@@ -19,19 +21,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Patch
 
-# Method key -> (panel label, colour, hatch). Hatch marks the transcript-input route.
+# Method key -> (colour, hatch). Hatch marks the text route (C) and the semantic variants.
 METHODS = {
-    "A": ("A: projector only", "#4C72B0", ""),
-    "A+sem": ("A + semantic", "#8CA9D4", "///"),
-    "A+sem3": ("A + semantic (3 ep)", "#C4D2E8", "///"),
-    "B": ("B: projector + head", "#DD8452", ""),
-    "C": ("C: ASR -> Laya (text)", "#55A868", "xxx"),
+    "A": ("#4C72B0", ""),
+    "A+sem": ("#8CA9D4", "///"),
+    "A+sem3": ("#C4D2E8", "///"),
+    "B": ("#DD8452", ""),
+    "C": ("#55A868", "xxx"),
 }
 
 PANELS = (
-    # title, n, majority-class baseline, {method: result file}
+    # panel key, n, majority-class baseline, {method: result file}
     (
-        "Robocall screening (binary)",
+        "robocall",
         282,
         146 / 282,
         {
@@ -43,7 +45,7 @@ PANELS = (
         },
     ),
     (
-        "MInDS-14 zero-shot (14-way)",
+        "minds14",
         563,
         0.0852575488454707,
         {
@@ -55,7 +57,7 @@ PANELS = (
         },
     ),
     (
-        "Urgency tone zero-shot (binary)",
+        "urgency",
         40,
         0.5,
         {
@@ -68,6 +70,51 @@ PANELS = (
     ),
 )
 
+LABELS = {
+    "en": {
+        "panels": {
+            "robocall": "Robocall screening (binary)",
+            "minds14": "MInDS-14 zero-shot (14-way)",
+            "urgency": "Urgency tone zero-shot (binary)",
+        },
+        "methods": {
+            "A": "A: projector only",
+            "A+sem": "A + semantic",
+            "A+sem3": "A + semantic (3 ep)",
+            "B": "B: projector + head",
+            "C": "C: ASR -> Laya (text)",
+        },
+        "majority": "majority-class baseline",
+        "majority_short": "majority class",
+        "y_label": "Accuracy",
+        "suffix": "",
+        "fonts": ["Liberation Serif", "DejaVu Serif"],
+        "legend_ncol": 6,
+        "legend_bottom": 0.07,
+    },
+    "th": {
+        "panels": {
+            "robocall": "การจำแนกสายโทรศัพท์ (สองคลาส)",
+            "minds14": "MInDS-14 แบบไม่ฝึกเพิ่ม (14 คลาส)",
+            "urgency": "ความเร่งด่วนแบบไม่ฝึกเพิ่ม (สองคลาส)",
+        },
+        "methods": {
+            "A": "A: ฝึกเฉพาะชั้นแปลงมิติ",
+            "A+sem": "A + จับคู่เสียงกับข้อความ",
+            "A+sem3": "A + จับคู่เสียงกับข้อความ (3 รอบ)",
+            "B": "B: ปรับส่วนตัดสินใจร่วมด้วย",
+            "C": "C: ASR $\\rightarrow$ Laya (ข้อความ)",
+        },
+        "majority": "ทายคลาสที่พบบ่อยที่สุด",
+        "majority_short": "คลาสที่พบบ่อย",
+        "y_label": "ความแม่นยำ",
+        "suffix": "_th",
+        "fonts": ["TH SarabunPSK", "Noto Sans Thai", "Noto Serif Thai"],
+        "legend_ncol": 3,
+        "legend_bottom": 0.16,
+    },
+}
+
 
 def accuracy(path: str | Path, method_key: str | None) -> float:
     """Read accuracy from a result file; method_key selects a nested entry."""
@@ -78,23 +125,23 @@ def accuracy(path: str | Path, method_key: str | None) -> float:
 
 
 def build(root: Path) -> dict:
-    """Collect {panel title: (accuracy array, baseline)} for every method."""
+    """Collect {panel key: (accuracy array, baseline, n)} for every method."""
     collected = {}
-    for title, n, baseline, sources in PANELS:
+    for key, n, baseline, sources in PANELS:
         values = []
-        for key, (path, method_key) in sources.items():
-            value = accuracy(root / path, method_key)
-            assert 0.0 <= value <= 1.0, f"{title}/{key}: accuracy {value} out of range"
+        for method_key, (path, entry) in sources.items():
+            value = accuracy(root / path, entry)
+            assert 0.0 <= value <= 1.0, f"{key}/{method_key}: accuracy {value} out of range"
             values.append(value)
-        collected[title] = (np.array(values), baseline, n)
+        collected[key] = (np.array(values), baseline, n)
     return collected
 
 
-def plot(collected: dict, out_pdf: Path) -> None:
+def plot(collected: dict, out_pdf: Path, labels: dict) -> None:
     plt.rcParams.update(
         {
             "font.family": "serif",
-            "font.serif": ["Liberation Serif", "DejaVu Serif"],
+            "font.serif": labels["fonts"],
             "mathtext.fontset": "stix",
             "font.size": 8,
             "axes.titlesize": 8.5,
@@ -111,13 +158,13 @@ def plot(collected: dict, out_pdf: Path) -> None:
     width = 0.78
 
     fig, axes = plt.subplots(1, 3, figsize=(7.4, 2.9), sharey=True)
-    for ax, (title, (values, baseline, n)) in zip(axes, collected.items()):
+    for ax, (panel, (values, baseline, n)) in zip(axes, collected.items()):
         ax.bar(
             x,
             values,
             width,
-            color=[METHODS[k][1] for k in keys],
-            hatch=[METHODS[k][2] for k in keys],
+            color=[METHODS[k][0] for k in keys],
+            hatch=[METHODS[k][1] for k in keys],
             edgecolor="white",
             linewidth=0.4,
             zorder=3,
@@ -133,7 +180,11 @@ def plot(collected: dict, out_pdf: Path) -> None:
                 va="bottom",
                 fontsize=6.4,
             )
-        ax.set_title(f"{title}\n$N = {n}$, majority class {baseline:.3f}", linespacing=1.4, pad=10)
+        ax.set_title(
+            f"{labels['panels'][panel]}\n$N = {n}$, {labels['majority_short']} {baseline:.3f}",
+            linespacing=1.4,
+            pad=10,
+        )
         ax.set_xticks(x)
         ax.set_xticklabels(keys, rotation=30, ha="right")
         ax.set_ylim(0, 1.12)
@@ -142,22 +193,25 @@ def plot(collected: dict, out_pdf: Path) -> None:
         ax.set_axisbelow(True)
         for side in ("top", "right"):
             ax.spines[side].set_visible(False)
-    axes[0].set_ylabel("Accuracy")
+    axes[0].set_ylabel(labels["y_label"])
 
-    handles = [Patch(facecolor=c, hatch=h, edgecolor="white", linewidth=0.4, label=label) for label, c, h in METHODS.values()]
+    handles = [
+        Patch(facecolor=METHODS[k][0], hatch=METHODS[k][1], edgecolor="white", linewidth=0.4, label=labels["methods"][k])
+        for k in keys
+    ]
     handles.append(
-        plt.Line2D([], [], color="#444444", linestyle=(0, (4, 2)), linewidth=0.7, label="majority-class baseline")
+        plt.Line2D([], [], color="#444444", linestyle=(0, (4, 2)), linewidth=0.7, label=labels["majority"])
     )
     fig.legend(
         handles=handles,
         loc="lower center",
-        ncol=6,
+        ncol=labels["legend_ncol"],
         frameon=False,
         bbox_to_anchor=(0.5, -0.03),
         handlelength=1.5,
         columnspacing=1.1,
     )
-    fig.tight_layout(rect=(0, 0.07, 1, 1))
+    fig.tight_layout(rect=(0, labels["legend_bottom"], 1, 1))
     out_pdf.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_pdf, bbox_inches="tight")
     fig.savefig(out_pdf.with_suffix(".png"), dpi=300, bbox_inches="tight")
@@ -167,13 +221,16 @@ def plot(collected: dict, out_pdf: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Build the accuracy-comparison figure")
     parser.add_argument("--root", default=".")
-    parser.add_argument("--out", default="results/accuracy_comparison.pdf")
+    parser.add_argument("--lang", choices=tuple(LABELS), default="en", help="figure label language")
+    parser.add_argument("--out", help="override the output path")
     args = parser.parse_args()
+    labels = LABELS[args.lang]
+    out = Path(args.out) if args.out else Path(f"results/accuracy_comparison{labels['suffix']}.pdf")
     collected = build(Path(args.root))
-    plot(collected, Path(args.root) / args.out)
-    print(f"wrote {args.out} and {Path(args.out).with_suffix('.png')}")
-    for title, (values, baseline, _) in collected.items():
-        print(f"  {title}: " + ", ".join(f"{k}={v:.3f}" for k, v in zip(METHODS, values)) + f" (baseline {baseline:.3f})")
+    plot(collected, Path(args.root) / out, labels)
+    print(f"wrote {out} and {out.with_suffix('.png')}")
+    for panel, (values, baseline, _) in collected.items():
+        print(f"  {panel}: " + ", ".join(f"{k}={v:.3f}" for k, v in zip(METHODS, values)) + f" (baseline {baseline:.3f})")
 
 
 if __name__ == "__main__":
