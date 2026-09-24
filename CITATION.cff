@@ -17,6 +17,8 @@ authors:
 version: 1.0.0
 date-released: 2026-09-24
 license: MIT
+repository-code: "https://github.com/ThanabordeeN/AudioLaya"
+url: "https://github.com/ThanabordeeN/AudioLaya"
 keywords:
   - speech classification
   - robocall detection

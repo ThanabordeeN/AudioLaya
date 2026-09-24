@@ -7,7 +7,9 @@ runs/
 # Per-call external evaluation data has not been cleared for repository storage.
 results/external_apptek/calls.jsonl
 
-# Technical reports and working notes are kept locally and are not published here.
+# Technical reports and working notes are kept locally. The reports published with a
+# release are the copies tracked in reports/; the LaTeX sources and working notes
+# stay untracked.
 results/technical_report_en.tex
 results/technical_report_en.pdf
 results/technical_report_th.tex

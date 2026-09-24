@@ -1,0 +1,74 @@
+{
+  "title": "Audio-Laya: direct speech-to-decision classification with a frozen Whisper encoder and a trainable projector",
+  "upload_type": "software",
+  "publication_date": "2026-09-24",
+  "version": "1.0.0",
+  "language": "eng",
+  "access_right": "open",
+  "license": "MIT",
+  "creators": [
+    {
+      "name": "Nammungkun, Thanabodee",
+      "orcid": "0009-0004-9410-9839"
+    }
+  ],
+  "description": "<p>Research prototype that classifies call audio as <em>legitimate</em> or <em>spam</em> directly from audio, without an intermediate transcription step. A frozen <code>whisper-small.en</code> encoder feeds a trainable 768-to-1024 projector whose output is appended to frozen ModernBERT text states inside the pretrained Laya decision model, so only the projector (and optionally Laya's decision components) is trained.</p><p>The deposit contains the source code, configuration, tests, the stored evaluation results, and the technical reports in English and Thai. It reports the internal call-level split, cross-task zero-shot transfer, semantic-alignment retrieval, and an external false-alarm check, together with the limitations that restrict what those numbers support.</p><p><strong>Headline results.</strong> On a 282-call internal test split, projector-only adaptation reached 99.6% macro F1 and projector-plus-decision-head reached 100.0%, against 89.2% for a Whisper-ASR-to-Laya text baseline. Zero-shot transfer to MInDS-14 14-way intent classification stayed at or below the majority-class baseline for both direct-audio variants, while the transcript route reached 93.6%.</p><p><strong>Limitations.</strong> All positive examples come from the FTC robocall corpus and all negative examples from HarperValleyBank, so corpus, recording conditions, and label are completely confounded. The high in-domain scores are a pipeline comparison, not evidence of real-world spam detection, and a matched-source, source-disjoint evaluation is required before any such claim. The model is not calibrated, and the urgency probe is a 40-clip synthetic set whose three-epoch result was selected after an earlier evaluation on the same clips.</p><p><strong>Not included.</strong> No source audio is redistributed; the datasets are linked as related identifiers and the README documents how to rebuild the manifests. Trained checkpoints are published separately on Hugging Face.</p><p>The technical reports are released under CC BY 4.0; the code, configuration, and scripts are released under the MIT License.</p>",
+  "keywords": [
+    "speech classification",
+    "robocall detection",
+    "spam detection",
+    "modality adaptation",
+    "projector",
+    "frozen encoder",
+    "Whisper",
+    "decision model",
+    "semantic alignment",
+    "zero-shot transfer",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://huggingface.co/Thanabordee/AudioLaya-poc",
+      "relation": "isSupplementedBy",
+      "scheme": "url",
+      "resource_type": "model"
+    },
+    {
+      "identifier": "https://github.com/wspr-ncsu/robocall-audio-dataset",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "https://github.com/cricketclub/gridspace-stanford-harper-valley",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "https://huggingface.co/datasets/PolyAI/minds14",
+      "relation": "references",
+      "scheme": "url",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "10.5281/zenodo.17502378",
+      "relation": "references",
+      "scheme": "doi",
+      "resource_type": "dataset"
+    },
+    {
+      "identifier": "https://huggingface.co/openai/whisper-small.en",
+      "relation": "requires",
+      "scheme": "url",
+      "resource_type": "model"
+    },
+    {
+      "identifier": "https://huggingface.co/convaiinnovations/laya",
+      "relation": "requires",
+      "scheme": "url",
+      "resource_type": "model"
+    }
+  ],
+  "notes": "Source audio from the FTC robocall corpus, HarperValleyBank, MInDS-14, and the urgency-tone set is not redistributed. Datasets and base model weights remain under their own terms."
+}

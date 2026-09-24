@@ -134,6 +134,10 @@ Training defaults are in [`configs/poc.yaml`](configs/poc.yaml). Early stopping 
 
 "Trainable params" counts only the parameters updated by each method. It is not deployed model size: Laya itself is a 421M-parameter model, and both Whisper and Laya stay loaded at inference.
 
+![Accuracy of every variant on the three evaluation sets](results/accuracy_comparison.png)
+
+Accuracy across all three evaluation sets on a common 0--1 axis, with each set's majority-class accuracy as a dashed line. In-domain robocall screening is at ceiling for the direct-audio variants; zero-shot transfer to MInDS-14 collapses onto the majority-class baseline. Hatching marks route C, which consumes transcript text and is not a matched input route for A and B. The three-epoch urgency bar is exploratory. Regenerate with `python -m src.plot_accuracy_comparison`.
+
 These are results on the same 282-call internal test split (146 Harper legitimate, 136 FTC spam; 576 chunks). A and B use the direct-audio path; C generates an in-memory Whisper transcript and sends it to standard Laya. The test labels are fully confounded with dataset source, so these scores are pipeline comparisons only—not evidence of real-world spam detection. Metrics are in `results/projector_only/metrics.json`, `results/metrics.json` (B), and `results/transcript_baseline.json` (C). C is about 11–14× slower per call than the direct-audio models on this test split (762 ms vs. 55–71 ms); exact latency depends on audio length and hardware.
 
 ### External AppTek evaluation
@@ -199,6 +203,28 @@ python -m src.transfer_eval --task configs/transfer_minds14.json --checkpoint-se
 python -m src.transfer_eval --task configs/transfer_urgency.json --checkpoint-semantic runs/projector_semantic/best.pt --skip-text-baselines --skip-gold-transcript --out results/transfer/urgency_semantic_zero_shot.json
 ```
 
+## Pretrained checkpoints
+
+The trained checkpoints are published at [huggingface.co/Thanabordee/AudioLaya-poc](https://huggingface.co/Thanabordee/AudioLaya-poc). Each file holds only the trainable delta; Whisper and Laya stay frozen and are pulled from their own model cards.
+
+| File | Experiment | Trainable params |
+|---|---|---:|
+| `projector_head/best.pt` | B: projector + Laya decision head | 28,086,785 |
+| `projector_only/best.pt` | A: projector only | 1,838,592 |
+| `projector_semantic/best.pt` | A + semantic alignment, 10 epochs | 1,838,592 |
+| `projector_semantic_3epochs/best.pt` | A + semantic alignment, 3 epochs | 1,838,592 |
+
+Download one into `runs/<experiment>/best.pt` before running evaluation or inference, or train it yourself with the commands above.
+
+## Technical reports
+
+| Report | File |
+|---|---|
+| English | [`reports/technical_report_en.pdf`](reports/technical_report_en.pdf) |
+| Thai | [`reports/technical_report_th.pdf`](reports/technical_report_th.pdf) |
+
+These are the reports published with this release. Their LaTeX sources are kept locally and are not tracked here.
+
 ## Streamlit demo
 
 ```bash
@@ -222,6 +248,6 @@ Open the local URL Streamlit prints. By default, choose **Unseen test sample** t
 
 Code, configuration, and scripts in this repository are released under the [MIT License](LICENSE).
 
-The technical reports and working notes are kept outside this repository and are released under CC BY 4.0.
+The technical reports in [`reports/`](reports/) are released under CC BY 4.0. Their LaTeX sources and working notes are kept outside this repository.
 
 This repository does not redistribute the FTC Robocall Audio dataset, the HarperValleyBank corpus, MInDS-14, or the Urgency-tone dataset. Download and use each source under its own terms.
