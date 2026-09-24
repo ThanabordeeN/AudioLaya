@@ -1,6 +1,6 @@
 # Audio-Laya — Direct Speech-to-Decision PoC
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22933034.svg)](https://doi.org/10.5281/zenodo.22933034)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22933883.svg)](https://doi.org/10.5281/zenodo.22933883)
 
 English-only PoC for classifying a call as `legitimate` or `spam` directly from audio. Default inference uses audio only. An optional semantic-alignment experiment uses paired source transcripts during training only.
 
@@ -254,14 +254,14 @@ Open the local URL Streamlit prints. By default, choose **Unseen test sample** t
   title     = {Audio-Laya: direct speech-to-decision classification with a frozen
                Whisper encoder and a trainable projector},
   year      = {2026},
-  version   = {1.0.0},
-  doi       = {10.5281/zenodo.22933034},
+  version   = {1.0.1},
+  doi       = {10.5281/zenodo.22933883},
   publisher = {Zenodo},
-  url       = {https://doi.org/10.5281/zenodo.22933034}
+  url       = {https://doi.org/10.5281/zenodo.22933883}
 }
 ```
 
-Use `10.5281/zenodo.22933034` to cite this version; `10.5281/zenodo.22933033` always resolves to the latest version. Machine-readable metadata is in [`CITATION.cff`](CITATION.cff).
+Use `10.5281/zenodo.22933883` to cite this version; `10.5281/zenodo.22933033` always resolves to the latest version. Machine-readable metadata is in [`CITATION.cff`](CITATION.cff).
 
 ## License
 
